@@ -32,8 +32,6 @@ drop.get("hello") { request in
         "message": "this is hello"])
 }
 
-
-
 drop.get("greetingWorld") { req in
     return try drop.view.make("hello", ["greeting": "World"])
 }
