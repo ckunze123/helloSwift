@@ -1,5 +1,5 @@
 import App
-
+import Vapor
 /// We have isolated all of our App's logic into
 /// the App module because it makes our app
 /// more testable.
@@ -21,5 +21,23 @@ try config.setup()
 
 let drop = try Droplet(config)
 try drop.setup()
+
+drop.get("/") { request in
+    return "Hello World!"
+}
+
+drop.get("hello") { request in
+    //return "Hello VApor"
+    return try JSON(node: [
+        "message": "this is hello"])
+}
+
+
+
+drop.get("greetingWorld") { req in
+    return try drop.view.make("hello", ["greeting": "World"])
+}
+
+
 
 try drop.run()
